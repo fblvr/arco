@@ -1,0 +1,34 @@
+version: 2
+models:
+- name: stg_crm_contract_line_item
+  description: Modelo staging da tabela stg_crm_contract_line_item. Contém limpeza
+    de campos, normalização de CNPJ/Telefone e hash de dados PII para conformidade
+    com a LGPD. Fonte de verdade inicial do DW.
+  columns:
+  - name: id
+    description: Chave primária (Primary Key) que identifica univocamente o registro
+      na tabela stg_crm_contract_line_item.
+    tests:
+    - not_null
+    - unique
+  - name: servicecontractid
+    description: Campo servicecontractid importado da origem stg_crm_contract_line_item.
+  - name: productid
+    description: Campo productid importado da origem stg_crm_contract_line_item.
+  - name: materialtype__c
+    description: Campo materialtype__c importado da origem stg_crm_contract_line_item.
+  - name: schoolgrade__c
+    description: Campo schoolgrade__c importado da origem stg_crm_contract_line_item.
+  - name: segment__c
+    description: Campo segment__c importado da origem stg_crm_contract_line_item.
+  - name: quantity
+    description: Campo quantity importado da origem stg_crm_contract_line_item.
+  - name: unitprice
+    description: Campo unitprice importado da origem stg_crm_contract_line_item.
+  - name: discount
+    description: Campo discount importado da origem stg_crm_contract_line_item.
+  - name: totalprice
+    description: Campo totalprice importado da origem stg_crm_contract_line_item.
+  - name: createddate
+    description: Data/Carimbo de tempo (Timestamp) referenciando a criação ou atualização
+      do evento.

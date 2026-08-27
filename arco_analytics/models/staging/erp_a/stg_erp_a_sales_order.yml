@@ -1,0 +1,41 @@
+version: 2
+models:
+- name: stg_erp_a_sales_order
+  description: Modelo staging da tabela stg_erp_a_sales_order. Contém limpeza de campos,
+    normalização de CNPJ/Telefone e hash de dados PII para conformidade com a LGPD.
+    Fonte de verdade inicial do DW.
+  columns:
+  - name: docentry
+    description: Chave primária (Primary Key) que identifica univocamente o registro
+      na tabela stg_erp_a_sales_order.
+    tests:
+    - unique
+    - not_null
+  - name: docnum
+    description: Campo docnum importado da origem stg_erp_a_sales_order.
+  - name: cardcode
+    description: Chave primária (Primary Key) que identifica univocamente o registro
+      na tabela stg_erp_a_sales_order.
+  - name: numatcard
+    description: Campo numatcard importado da origem stg_erp_a_sales_order.
+  - name: docdate
+    description: Data/Carimbo de tempo (Timestamp) referenciando a criação ou atualização
+      do evento.
+  - name: docduedate
+    description: Data/Carimbo de tempo (Timestamp) referenciando a criação ou atualização
+      do evento.
+  - name: docstatus
+    description: Status do registro, sujeito a normalização na camada Silver.
+  - name: cancelled
+    description: Campo cancelled importado da origem stg_erp_a_sales_order.
+  - name: comments
+    description: Campo comments importado da origem stg_erp_a_sales_order.
+  - name: slpcode
+    description: Chave primária (Primary Key) que identifica univocamente o registro
+      na tabela stg_erp_a_sales_order.
+  - name: createdate
+    description: Data/Carimbo de tempo (Timestamp) referenciando a criação ou atualização
+      do evento.
+  - name: updatedate
+    description: Data/Carimbo de tempo (Timestamp) referenciando a criação ou atualização
+      do evento.

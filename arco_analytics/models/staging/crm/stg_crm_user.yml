@@ -1,0 +1,28 @@
+version: 2
+models:
+- name: stg_crm_user
+  description: Modelo staging da tabela stg_crm_user. Contém limpeza de campos, normalização
+    de CNPJ/Telefone e hash de dados PII para conformidade com a LGPD. Fonte de verdade
+    inicial do DW.
+  columns:
+  - name: id
+    description: Chave primária (Primary Key) que identifica univocamente o registro
+      na tabela stg_crm_user.
+    tests:
+    - not_null
+    - unique
+  - name: name
+    description: Nome ou Razão Social associado ao registro.
+  - name: email
+    description: Endereço de e-mail corporativo ou de contato. Hash aplicado para
+      conformidade com LGPD.
+  - name: profilename
+    description: Nome ou Razão Social associado ao registro.
+  - name: isactive
+    description: Campo isactive importado da origem stg_crm_user.
+  - name: createddate
+    description: Data/Carimbo de tempo (Timestamp) referenciando a criação ou atualização
+      do evento.
+  - name: lastmodifieddate
+    description: Data/Carimbo de tempo (Timestamp) referenciando a criação ou atualização
+      do evento.

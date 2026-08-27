@@ -1,0 +1,45 @@
+version: 2
+models:
+- name: stg_crm_account
+  description: Modelo staging da tabela stg_crm_account. Contém limpeza de campos,
+    normalização de CNPJ/Telefone e hash de dados PII para conformidade com a LGPD.
+    Fonte de verdade inicial do DW.
+  columns:
+  - name: id
+    description: Chave primária (Primary Key) que identifica univocamente o registro
+      na tabela stg_crm_account.
+    tests:
+    - not_null
+    - unique
+  - name: name
+    description: Nome ou Razão Social associado ao registro.
+  - name: razaosocial__c
+    description: Nome ou Razão Social associado ao registro.
+  - name: cnpj__c
+    description: Cadastro Nacional da Pessoa Jurídica (CNPJ). Chave de negócio tratada
+      e limpa (apenas números).
+  - name: type
+    description: Campo type importado da origem stg_crm_account.
+  - name: parentid
+    description: Campo parentid importado da origem stg_crm_account.
+  - name: phone
+    description: Telefone de contato normalizado (apenas números, sem código de país
+      +55).
+  - name: billingcity
+    description: Campo billingcity importado da origem stg_crm_account.
+  - name: billingstate
+    description: Campo billingstate importado da origem stg_crm_account.
+  - name: salesmodality__c
+    description: Campo salesmodality__c importado da origem stg_crm_account.
+  - name: segment__c
+    description: Campo segment__c importado da origem stg_crm_account.
+  - name: ownerid
+    description: Campo ownerid importado da origem stg_crm_account.
+  - name: isdeleted
+    description: Campo isdeleted importado da origem stg_crm_account.
+  - name: createddate
+    description: Data/Carimbo de tempo (Timestamp) referenciando a criação ou atualização
+      do evento.
+  - name: lastmodifieddate
+    description: Data/Carimbo de tempo (Timestamp) referenciando a criação ou atualização
+      do evento.

@@ -1,0 +1,47 @@
+version: 2
+models:
+- name: stg_crm_service_contract
+  description: Modelo staging da tabela stg_crm_service_contract. Contém limpeza de
+    campos, normalização de CNPJ/Telefone e hash de dados PII para conformidade com
+    a LGPD. Fonte de verdade inicial do DW.
+  columns:
+  - name: id
+    description: Chave primária (Primary Key) que identifica univocamente o registro
+      na tabela stg_crm_service_contract.
+    tests:
+    - not_null
+    - unique
+  - name: contractnumber
+    description: Campo contractnumber importado da origem stg_crm_service_contract.
+  - name: name
+    description: Nome ou Razão Social associado ao registro.
+  - name: accountid
+    description: Campo accountid importado da origem stg_crm_service_contract.
+  - name: ownerid
+    description: Campo ownerid importado da origem stg_crm_service_contract.
+  - name: status
+    description: Status do registro, sujeito a normalização na camada Silver.
+  - name: startdate
+    description: Data/Carimbo de tempo (Timestamp) referenciando a criação ou atualização
+      do evento.
+  - name: enddate
+    description: Data/Carimbo de tempo (Timestamp) referenciando a criação ou atualização
+      do evento.
+  - name: brand__c
+    description: Campo brand__c importado da origem stg_crm_service_contract.
+  - name: grandtotal
+    description: Campo grandtotal importado da origem stg_crm_service_contract.
+  - name: totalprice
+    description: Campo totalprice importado da origem stg_crm_service_contract.
+  - name: discount
+    description: Campo discount importado da origem stg_crm_service_contract.
+  - name: marketingmodel__c
+    description: Campo marketingmodel__c importado da origem stg_crm_service_contract.
+  - name: isdeleted
+    description: Campo isdeleted importado da origem stg_crm_service_contract.
+  - name: createddate
+    description: Data/Carimbo de tempo (Timestamp) referenciando a criação ou atualização
+      do evento.
+  - name: lastmodifieddate
+    description: Data/Carimbo de tempo (Timestamp) referenciando a criação ou atualização
+      do evento.

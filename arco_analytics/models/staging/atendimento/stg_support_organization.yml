@@ -1,0 +1,27 @@
+version: 2
+models:
+- name: stg_support_organization
+  description: Modelo staging da tabela stg_support_organization. Contém limpeza de
+    campos, normalização de CNPJ/Telefone e hash de dados PII para conformidade com
+    a LGPD. Fonte de verdade inicial do DW.
+  columns:
+  - name: id
+    description: Chave primária (Primary Key) que identifica univocamente o registro
+      na tabela stg_support_organization.
+    tests:
+    - not_null
+    - unique
+  - name: name
+    description: Nome ou Razão Social associado ao registro.
+  - name: details
+    description: Campo details importado da origem stg_support_organization.
+  - name: external_id
+    description: Campo external_id importado da origem stg_support_organization.
+  - name: domain_names
+    description: Nome ou Razão Social associado ao registro.
+  - name: created_at
+    description: Data/Carimbo de tempo (Timestamp) referenciando a criação ou atualização
+      do evento.
+  - name: updated_at
+    description: Data/Carimbo de tempo (Timestamp) referenciando a criação ou atualização
+      do evento.

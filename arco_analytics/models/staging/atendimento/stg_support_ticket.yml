@@ -1,0 +1,54 @@
+version: 2
+models:
+- name: stg_support_ticket
+  description: Modelo staging da tabela stg_support_ticket. Contém limpeza de campos,
+    normalização de CNPJ/Telefone e hash de dados PII para conformidade com a LGPD.
+    Fonte de verdade inicial do DW.
+  columns:
+  - name: id
+    description: Chave primária (Primary Key) que identifica univocamente o registro
+      na tabela stg_support_ticket.
+    tests:
+    - not_null
+    - unique
+  - name: subject
+    description: Campo subject importado da origem stg_support_ticket.
+  - name: description
+    description: Campo description importado da origem stg_support_ticket.
+  - name: status
+    description: Status do registro, sujeito a normalização na camada Silver.
+  - name: priority
+    description: Campo priority importado da origem stg_support_ticket.
+  - name: type
+    description: Campo type importado da origem stg_support_ticket.
+  - name: requester_id
+    description: Campo requester_id importado da origem stg_support_ticket.
+  - name: submitter_id
+    description: Campo submitter_id importado da origem stg_support_ticket.
+  - name: assignee_id
+    description: Campo assignee_id importado da origem stg_support_ticket.
+  - name: organization_id
+    description: Campo organization_id importado da origem stg_support_ticket.
+  - name: tags
+    description: Campo tags importado da origem stg_support_ticket.
+  - name: custom_field_order_ref
+    description: Campo custom_field_order_ref importado da origem stg_support_ticket.
+  - name: custom_field_cnpj
+    description: Cadastro Nacional da Pessoa Jurídica (CNPJ). Chave de negócio tratada
+      e limpa (apenas números).
+  - name: satisfaction_score
+    description: Campo satisfaction_score importado da origem stg_support_ticket.
+  - name: satisfaction_comment
+    description: Campo satisfaction_comment importado da origem stg_support_ticket.
+  - name: created_at
+    description: Data/Carimbo de tempo (Timestamp) referenciando a criação ou atualização
+      do evento.
+  - name: updated_at
+    description: Data/Carimbo de tempo (Timestamp) referenciando a criação ou atualização
+      do evento.
+  - name: solved_at
+    description: Data/Carimbo de tempo (Timestamp) referenciando a criação ou atualização
+      do evento.
+  - name: due_at
+    description: Data/Carimbo de tempo (Timestamp) referenciando a criação ou atualização
+      do evento.

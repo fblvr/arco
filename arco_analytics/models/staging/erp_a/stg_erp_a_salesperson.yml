@@ -1,0 +1,19 @@
+version: 2
+models:
+- name: stg_erp_a_salesperson
+  description: Modelo staging da tabela stg_erp_a_salesperson. Contém limpeza de campos,
+    normalização de CNPJ/Telefone e hash de dados PII para conformidade com a LGPD.
+    Fonte de verdade inicial do DW.
+  columns:
+  - name: slpcode
+    description: Chave primária (Primary Key) que identifica univocamente o registro
+      na tabela stg_erp_a_salesperson.
+    tests:
+    - unique
+    - not_null
+  - name: slpname
+    description: Nome ou Razão Social associado ao registro.
+  - name: memo
+    description: Campo memo importado da origem stg_erp_a_salesperson.
+  - name: active
+    description: Campo active importado da origem stg_erp_a_salesperson.

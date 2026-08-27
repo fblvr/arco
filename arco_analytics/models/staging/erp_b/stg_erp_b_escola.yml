@@ -1,0 +1,34 @@
+version: 2
+models:
+- name: stg_erp_b_escola
+  description: Modelo staging da tabela stg_erp_b_escola. Contém limpeza de campos,
+    normalização de CNPJ/Telefone e hash de dados PII para conformidade com a LGPD.
+    Fonte de verdade inicial do DW.
+  columns:
+  - name: id_escola
+    description: Chave primária (Primary Key) que identifica univocamente o registro
+      na tabela stg_erp_b_escola.
+    tests:
+    - unique
+    - not_null
+  - name: nome_escola
+    description: Nome ou Razão Social associado ao registro.
+  - name: cnpj
+    description: Cadastro Nacional da Pessoa Jurídica (CNPJ). Chave de negócio tratada
+      e limpa (apenas números).
+  - name: cidade
+    description: Campo cidade importado da origem stg_erp_b_escola.
+  - name: estado
+    description: Campo estado importado da origem stg_erp_b_escola.
+  - name: email
+    description: Endereço de e-mail corporativo ou de contato. Hash aplicado para
+      conformidade com LGPD.
+  - name: id_vendedor
+    description: Chave primária (Primary Key) que identifica univocamente o registro
+      na tabela stg_erp_b_escola.
+  - name: dt_cadastro
+    description: Data/Carimbo de tempo (Timestamp) referenciando a criação ou atualização
+      do evento.
+  - name: dt_atualizacao
+    description: Data/Carimbo de tempo (Timestamp) referenciando a criação ou atualização
+      do evento.

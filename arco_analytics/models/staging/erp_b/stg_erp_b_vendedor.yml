@@ -1,0 +1,22 @@
+version: 2
+models:
+- name: stg_erp_b_vendedor
+  description: Modelo staging da tabela stg_erp_b_vendedor. Contém limpeza de campos,
+    normalização de CNPJ/Telefone e hash de dados PII para conformidade com a LGPD.
+    Fonte de verdade inicial do DW.
+  columns:
+  - name: id_vendedor
+    description: Chave primária (Primary Key) que identifica univocamente o registro
+      na tabela stg_erp_b_vendedor.
+    tests:
+    - unique
+    - not_null
+  - name: nome
+    description: Nome ou Razão Social associado ao registro.
+  - name: email
+    description: Endereço de e-mail corporativo ou de contato. Hash aplicado para
+      conformidade com LGPD.
+  - name: regiao
+    description: Campo regiao importado da origem stg_erp_b_vendedor.
+  - name: ativo
+    description: Campo ativo importado da origem stg_erp_b_vendedor.

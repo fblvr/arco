@@ -1,0 +1,32 @@
+version: 2
+models:
+- name: stg_erp_a_sales_order_item
+  description: Modelo staging da tabela stg_erp_a_sales_order_item. Contém limpeza
+    de campos, normalização de CNPJ/Telefone e hash de dados PII para conformidade
+    com a LGPD. Fonte de verdade inicial do DW.
+  columns:
+  - name: docentry
+    description: Chave estrangeira para o cabeçalho do pedido (sales order).
+    tests:
+    - not_null
+  - name: linenum
+    description: Campo linenum importado da origem stg_erp_a_sales_order_item.
+  - name: itemcode
+    description: Campo itemcode importado da origem stg_erp_a_sales_order_item.
+  - name: itemname
+    description: Nome ou Razão Social associado ao registro.
+  - name: quantity
+    description: Campo quantity importado da origem stg_erp_a_sales_order_item.
+  - name: delivrdqty
+    description: Campo delivrdqty importado da origem stg_erp_a_sales_order_item.
+  - name: openqty
+    description: Campo openqty importado da origem stg_erp_a_sales_order_item.
+  - name: shipdate
+    description: Data/Carimbo de tempo (Timestamp) referenciando a criação ou atualização
+      do evento.
+  - name: linestatus
+    description: Status do registro, sujeito a normalização na camada Silver.
+  - name: price
+    description: Campo price importado da origem stg_erp_a_sales_order_item.
+  - name: linetotal
+    description: Campo linetotal importado da origem stg_erp_a_sales_order_item.

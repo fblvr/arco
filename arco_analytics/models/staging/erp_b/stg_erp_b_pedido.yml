@@ -1,0 +1,35 @@
+version: 2
+models:
+- name: stg_erp_b_pedido
+  description: Modelo staging da tabela stg_erp_b_pedido. Contém limpeza de campos,
+    normalização de CNPJ/Telefone e hash de dados PII para conformidade com a LGPD.
+    Fonte de verdade inicial do DW.
+  columns:
+  - name: id_pedido
+    description: Chave primária (Primary Key) que identifica univocamente o registro
+      na tabela stg_erp_b_pedido.
+    tests:
+    - unique
+    - not_null
+  - name: id_escola
+    description: Chave primária (Primary Key) que identifica univocamente o registro
+      na tabela stg_erp_b_pedido.
+  - name: num_contrato
+    description: Campo num_contrato importado da origem stg_erp_b_pedido.
+  - name: dt_pedido
+    description: Data/Carimbo de tempo (Timestamp) referenciando a criação ou atualização
+      do evento.
+  - name: dt_entrega_prevista
+    description: Data/Carimbo de tempo (Timestamp) referenciando a criação ou atualização
+      do evento.
+  - name: status
+    description: Status do registro, sujeito a normalização na camada Silver.
+  - name: id_vendedor
+    description: Chave primária (Primary Key) que identifica univocamente o registro
+      na tabela stg_erp_b_pedido.
+  - name: dt_criacao
+    description: Data/Carimbo de tempo (Timestamp) referenciando a criação ou atualização
+      do evento.
+  - name: dt_atualizacao
+    description: Data/Carimbo de tempo (Timestamp) referenciando a criação ou atualização
+      do evento.

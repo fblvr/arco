@@ -1,0 +1,30 @@
+version: 2
+models:
+- name: stg_erp_a_delivery
+  description: Modelo staging da tabela stg_erp_a_delivery. Contém limpeza de campos,
+    normalização de CNPJ/Telefone e hash de dados PII para conformidade com a LGPD.
+    Fonte de verdade inicial do DW.
+  columns:
+  - name: docentry
+    description: Chave primária (Primary Key) que identifica univocamente o registro
+      na tabela stg_erp_a_delivery.
+    tests:
+    - unique
+    - not_null
+  - name: docnum
+    description: Campo docnum importado da origem stg_erp_a_delivery.
+  - name: cardcode
+    description: Chave primária (Primary Key) que identifica univocamente o registro
+      na tabela stg_erp_a_delivery.
+  - name: baseentry
+    description: Campo baseentry importado da origem stg_erp_a_delivery.
+  - name: docdate
+    description: Data/Carimbo de tempo (Timestamp) referenciando a criação ou atualização
+      do evento.
+  - name: docstatus
+    description: Status do registro, sujeito a normalização na camada Silver.
+  - name: cancelled
+    description: Campo cancelled importado da origem stg_erp_a_delivery.
+  - name: createdate
+    description: Data/Carimbo de tempo (Timestamp) referenciando a criação ou atualização
+      do evento.

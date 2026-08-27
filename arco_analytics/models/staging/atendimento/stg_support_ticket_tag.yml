@@ -1,0 +1,11 @@
+version: 2
+models:
+- name: stg_support_ticket_tag
+  description: Modelo staging da tabela stg_support_ticket_tag. Contém limpeza de
+    campos, normalização de CNPJ/Telefone e hash de dados PII para conformidade com
+    a LGPD. Fonte de verdade inicial do DW.
+  columns:
+  - name: ticket_id
+    description: Campo ticket_id importado da origem stg_support_ticket_tag.
+  - name: tag
+    description: Campo tag importado da origem stg_support_ticket_tag.

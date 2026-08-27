@@ -1,0 +1,23 @@
+version: 2
+models:
+- name: stg_erp_b_item_pedido
+  description: Modelo staging da tabela stg_erp_b_item_pedido. Contém limpeza de campos,
+    normalização de CNPJ/Telefone e hash de dados PII para conformidade com a LGPD.
+    Fonte de verdade inicial do DW.
+  columns:
+  - name: id_item
+    description: Campo id_item importado da origem stg_erp_b_item_pedido.
+  - name: id_pedido
+    description: Chave primária (Primary Key) que identifica univocamente o registro
+      na tabela stg_erp_b_item_pedido.
+  - name: cod_produto
+    description: Campo cod_produto importado da origem stg_erp_b_item_pedido.
+  - name: desc_produto
+    description: Campo desc_produto importado da origem stg_erp_b_item_pedido.
+  - name: qtd_pedida
+    description: Campo qtd_pedida importado da origem stg_erp_b_item_pedido.
+  - name: preco_unitario
+    description: Campo preco_unitario importado da origem stg_erp_b_item_pedido.
+  - name: dt_criacao
+    description: Data/Carimbo de tempo (Timestamp) referenciando a criação ou atualização
+      do evento.

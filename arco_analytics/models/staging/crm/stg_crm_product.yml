@@ -1,0 +1,26 @@
+version: 2
+models:
+- name: stg_crm_product
+  description: Modelo staging da tabela stg_crm_product. Contém limpeza de campos,
+    normalização de CNPJ/Telefone e hash de dados PII para conformidade com a LGPD.
+    Fonte de verdade inicial do DW.
+  columns:
+  - name: id
+    description: Chave primária (Primary Key) que identifica univocamente o registro
+      na tabela stg_crm_product.
+    tests:
+    - not_null
+    - unique
+  - name: productcode
+    description: Campo productcode importado da origem stg_crm_product.
+  - name: name
+    description: Nome ou Razão Social associado ao registro.
+  - name: brand__c
+    description: Campo brand__c importado da origem stg_crm_product.
+  - name: materialtype__c
+    description: Campo materialtype__c importado da origem stg_crm_product.
+  - name: isactive
+    description: Campo isactive importado da origem stg_crm_product.
+  - name: createddate
+    description: Data/Carimbo de tempo (Timestamp) referenciando a criação ou atualização
+      do evento.

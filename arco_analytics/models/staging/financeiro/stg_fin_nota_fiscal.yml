@@ -1,0 +1,51 @@
+version: 2
+models:
+- name: stg_fin_nota_fiscal
+  description: Modelo staging da tabela stg_fin_nota_fiscal. Contém limpeza de campos,
+    normalização de CNPJ/Telefone e hash de dados PII para conformidade com a LGPD.
+    Fonte de verdade inicial do DW.
+  columns:
+  - name: id_nf
+    description: Chave primária (Primary Key) que identifica univocamente o registro
+      na tabela stg_fin_nota_fiscal.
+    tests:
+    - unique
+    - not_null
+  - name: numero_nf
+    description: Campo numero_nf importado da origem stg_fin_nota_fiscal.
+  - name: serie_nf
+    description: Campo serie_nf importado da origem stg_fin_nota_fiscal.
+  - name: id_pedido_erp_b
+    description: Campo id_pedido_erp_b importado da origem stg_fin_nota_fiscal.
+  - name: cnpj_cliente
+    description: Cadastro Nacional da Pessoa Jurídica (CNPJ). Chave de negócio tratada
+      e limpa (apenas números).
+  - name: nome_cliente
+    description: Nome ou Razão Social associado ao registro.
+  - name: dt_emissao
+    description: Data/Carimbo de tempo (Timestamp) referenciando a criação ou atualização
+      do evento.
+  - name: valor_total
+    description: Campo valor_total importado da origem stg_fin_nota_fiscal.
+  - name: valor_impostos
+    description: Campo valor_impostos importado da origem stg_fin_nota_fiscal.
+  - name: cnpj_transportadora
+    description: Cadastro Nacional da Pessoa Jurídica (CNPJ). Chave de negócio tratada
+      e limpa (apenas números).
+  - name: nome_transportadora
+    description: Nome ou Razão Social associado ao registro.
+  - name: codigo_rastreio
+    description: Campo codigo_rastreio importado da origem stg_fin_nota_fiscal.
+  - name: dt_prevista_entrega
+    description: Data/Carimbo de tempo (Timestamp) referenciando a criação ou atualização
+      do evento.
+  - name: dt_entrega_real
+    description: Data/Carimbo de tempo (Timestamp) referenciando a criação ou atualização
+      do evento.
+  - name: status_entrega
+    description: Status do registro, sujeito a normalização na camada Silver.
+  - name: qtd_entregue
+    description: Campo qtd_entregue importado da origem stg_fin_nota_fiscal.
+  - name: dt_criacao
+    description: Data/Carimbo de tempo (Timestamp) referenciando a criação ou atualização
+      do evento.

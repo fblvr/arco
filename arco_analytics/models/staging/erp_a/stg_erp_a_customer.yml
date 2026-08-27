@@ -1,0 +1,36 @@
+version: 2
+models:
+- name: stg_erp_a_customer
+  description: Modelo staging da tabela stg_erp_a_customer. Contém limpeza de campos,
+    normalização de CNPJ/Telefone e hash de dados PII para conformidade com a LGPD.
+    Fonte de verdade inicial do DW.
+  columns:
+  - name: cardcode
+    description: Chave primária (Primary Key) que identifica univocamente o registro
+      na tabela stg_erp_a_customer.
+    tests:
+    - unique
+    - not_null
+  - name: cardname
+    description: Nome ou Razão Social associado ao registro.
+  - name: cnpj
+    description: Cadastro Nacional da Pessoa Jurídica (CNPJ). Chave de negócio tratada
+      e limpa (apenas números).
+  - name: city
+    description: Campo city importado da origem stg_erp_a_customer.
+  - name: state
+    description: Campo state importado da origem stg_erp_a_customer.
+  - name: phone1
+    description: Telefone de contato normalizado (apenas números, sem código de país
+      +55).
+  - name: e_mail
+    description: Campo e_mail importado da origem stg_erp_a_customer.
+  - name: slpcode
+    description: Chave primária (Primary Key) que identifica univocamente o registro
+      na tabela stg_erp_a_customer.
+  - name: createdate
+    description: Data/Carimbo de tempo (Timestamp) referenciando a criação ou atualização
+      do evento.
+  - name: updatedate
+    description: Data/Carimbo de tempo (Timestamp) referenciando a criação ou atualização
+      do evento.

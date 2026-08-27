@@ -1,0 +1,33 @@
+version: 2
+models:
+- name: stg_support_user
+  description: Modelo staging da tabela stg_support_user. Contém limpeza de campos,
+    normalização de CNPJ/Telefone e hash de dados PII para conformidade com a LGPD.
+    Fonte de verdade inicial do DW.
+  columns:
+  - name: id
+    description: Chave primária (Primary Key) que identifica univocamente o registro
+      na tabela stg_support_user.
+    tests:
+    - not_null
+    - unique
+  - name: name
+    description: Nome ou Razão Social associado ao registro.
+  - name: email
+    description: Endereço de e-mail corporativo ou de contato. Hash aplicado para
+      conformidade com LGPD.
+  - name: phone
+    description: Telefone de contato normalizado (apenas números, sem código de país
+      +55).
+  - name: organization_id
+    description: Campo organization_id importado da origem stg_support_user.
+  - name: role
+    description: Campo role importado da origem stg_support_user.
+  - name: is_active
+    description: Campo is_active importado da origem stg_support_user.
+  - name: created_at
+    description: Data/Carimbo de tempo (Timestamp) referenciando a criação ou atualização
+      do evento.
+  - name: updated_at
+    description: Data/Carimbo de tempo (Timestamp) referenciando a criação ou atualização
+      do evento.

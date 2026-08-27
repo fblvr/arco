@@ -1,0 +1,32 @@
+version: 2
+models:
+- name: stg_erp_a_invoice
+  description: Modelo staging da tabela stg_erp_a_invoice. Contém limpeza de campos,
+    normalização de CNPJ/Telefone e hash de dados PII para conformidade com a LGPD.
+    Fonte de verdade inicial do DW.
+  columns:
+  - name: docentry
+    description: Chave primária (Primary Key) que identifica univocamente o registro
+      na tabela stg_erp_a_invoice.
+    tests:
+    - unique
+    - not_null
+  - name: docnum
+    description: Campo docnum importado da origem stg_erp_a_invoice.
+  - name: cardcode
+    description: Chave primária (Primary Key) que identifica univocamente o registro
+      na tabela stg_erp_a_invoice.
+  - name: baseentry
+    description: Campo baseentry importado da origem stg_erp_a_invoice.
+  - name: docdate
+    description: Data/Carimbo de tempo (Timestamp) referenciando a criação ou atualização
+      do evento.
+  - name: doctotal
+    description: Campo doctotal importado da origem stg_erp_a_invoice.
+  - name: vatsum
+    description: Campo vatsum importado da origem stg_erp_a_invoice.
+  - name: cancelled
+    description: Campo cancelled importado da origem stg_erp_a_invoice.
+  - name: createdate
+    description: Data/Carimbo de tempo (Timestamp) referenciando a criação ou atualização
+      do evento.
