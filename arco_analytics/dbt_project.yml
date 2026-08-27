@@ -1,0 +1,41 @@
+name: 'arco_analytics'
+version: '1.0.0'
+config-version: 2
+
+profile: 'arco_analytics'
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+models:
+  arco_analytics:
+    # -------------------------------------------------------------
+    # MEDALLION ARCHITECTURE MAPPING
+    # -------------------------------------------------------------
+    
+    # 1. BRONZE (Raw / Staging)
+    # A pasta staging tipifica e limpa os dados brutos (sources).
+    staging:
+      +materialized: view
+      +schema: bronze
+      
+    marts:
+      # 2. SILVER (Core / Star Schema)
+      # A pasta core integra e normaliza Fatos e Dimensões.
+      core:
+        +materialized: table
+        +schema: silver
+        
+      # 3. GOLD (Analytics / OBTs)
+      # A pasta analytics gera as tabelas finais para consumo de BI.
+      analytics:
+        +materialized: table
+        +schema: gold

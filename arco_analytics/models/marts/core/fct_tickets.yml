@@ -11,7 +11,13 @@ models:
   - name: id_cliente
     description: CNPJ fallback da organização que abriu o ticket.
   - name: status
-    description: Status da solicitação.
+    description: Status do ticket.
+    tests:
+    - accepted_values:
+        values:
+        - PENDING
+        - CLOSED
+        - NEW
   - name: created_at
     description: Abertura.
   - name: solved_at
@@ -25,3 +31,11 @@ models:
       changes: Enriquecimento massivo de metadados PII e Data Quality.
     join_logic: Chamados de suporte. FK_organization = id_escola (via CNPJ).
     business_rules: Sem regras complexas documentadas.
+    grain: 1 linha = 1 ticket de suporte
+    domain: Suporte
+    update_frequency: Diário
+    governance: Silver Certified
+  config:
+    tags:
+    - core
+    - suporte
