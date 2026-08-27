@@ -1,0 +1,22 @@
+version: 2
+models:
+  - name: fct_vendas
+    description: 'Fato Vendas (Cabeçalho/Header). Evita fan-out mantendo granularidade de pedido (1 linha = 1 pedido). Regra de Negócio: Pedidos CANCELADOS na origem ERP A (5 registros) não possuem amarração de itens na tabela de detalhe (fct_vendas_itens), gerando órfãos intencionais. Isso não configura perda de dados, mas sim um padrão transacional de rascunhos (Drafts).'
+    columns:
+      - name: id_pedido
+        description: 'SK do pedido prefixado com origem. Chave primária.'
+        tests:
+          - unique
+          - not_null
+      - name: id_cliente
+        description: 'CNPJ do cliente. Chave estrangeira para dim_escolas.'
+      - name: data_pedido
+        description: 'Data de emissão do pedido.'
+      - name: id_vendedor_sk
+        description: 'SK do vendedor. Chave estrangeira para dim_vendedores.'
+      - name: status_pedido
+        description: 'Status normalizado do pedido.'
+      - name: is_cancelado
+        description: 'Flag indicando cancelamento.'
+      - name: sistema_origem
+        description: 'Sistema (ERP A ou ERP B).'
