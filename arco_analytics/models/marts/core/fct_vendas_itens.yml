@@ -1,0 +1,27 @@
+version: 2
+models:
+- name: fct_vendas_itens
+  description: Fato Vendas (Detalhes/Itens). Traz a granularidade de produtos comprados.
+  columns:
+  - name: id_item_pedido
+    description: SK do item do pedido. Chave primária.
+    tests:
+    - unique
+    - not_null
+  - name: id_pedido
+    description: SK do pedido pai.
+  - name: id_produto_origem
+    description: Código do produto no sistema fonte.
+  - name: qtd_pedida
+    description: Quantidade adquirida.
+  - name: valor_total
+    description: Receita bruta do item.
+  - name: sistema_origem
+    description: Sistema (ERP A ou ERP B).
+  meta:
+    owner: '@data_engineering_team'
+    business_context: Domínio de dados corporativo da Arco Educação.
+    changelog:
+    - date: '2026-08-27'
+      author: Debugger-Global
+      changes: Enriquecimento massivo de metadados PII e Data Quality.

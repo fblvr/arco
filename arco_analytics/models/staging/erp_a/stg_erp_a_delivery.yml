@@ -28,3 +28,10 @@ models:
   - name: createdate
     description: Data/Carimbo de tempo (Timestamp) referenciando a criação ou atualização
       do evento.
+  meta:
+    owner: '@data_engineering_team'
+    business_context: Domínio de dados corporativo da Arco Educação.
+    changelog:
+    - date: '2026-08-27'
+      author: Debugger-Global
+      changes: Enriquecimento massivo de metadados PII e Data Quality.

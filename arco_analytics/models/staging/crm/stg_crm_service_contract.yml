@@ -15,6 +15,9 @@ models:
     description: Campo contractnumber importado da origem stg_crm_service_contract.
   - name: name
     description: Nome ou Razão Social associado ao registro.
+    meta:
+      contains_pii: true
+      classification: Restricted
   - name: accountid
     description: Campo accountid importado da origem stg_crm_service_contract.
   - name: ownerid
@@ -45,3 +48,10 @@ models:
   - name: lastmodifieddate
     description: Data/Carimbo de tempo (Timestamp) referenciando a criação ou atualização
       do evento.
+  meta:
+    owner: '@data_engineering_team'
+    business_context: Domínio de dados corporativo da Arco Educação.
+    changelog:
+    - date: '2026-08-27'
+      author: Debugger-Global
+      changes: Enriquecimento massivo de metadados PII e Data Quality.

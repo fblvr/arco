@@ -1,0 +1,26 @@
+version: 2
+models:
+- name: dim_vendedores
+  description: Dimensão unificada de vendedores dos ERPs.
+  columns:
+  - name: id_vendedor_sk
+    description: Surrogate Key (Sistema + ID). Chave primária.
+    tests:
+    - unique
+    - not_null
+  - name: id_vendedor_sistema
+    description: ID original do vendedor no sistema de origem.
+  - name: nome_vendedor
+    description: Nome do vendedor.
+    meta:
+      contains_pii: true
+      classification: Restricted
+  - name: sistema_origem
+    description: Sistema de onde o registro foi extraído.
+  meta:
+    owner: '@data_engineering_team'
+    business_context: Domínio de dados corporativo da Arco Educação.
+    changelog:
+    - date: '2026-08-27'
+      author: Debugger-Global
+      changes: Enriquecimento massivo de metadados PII e Data Quality.

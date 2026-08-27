@@ -1,0 +1,30 @@
+version: 2
+models:
+- name: dim_produtos
+  description: Catálogo unificado de produtos (CRM, ERP A, ERP B).
+  columns:
+  - name: id_produto_unificado
+    description: Hash unificado do produto. Chave primária.
+    tests:
+    - unique
+    - not_null
+  - name: nome_produto
+    description: Nome do produto resolvido entre sistemas.
+    meta:
+      contains_pii: true
+      classification: Restricted
+  - name: marca
+    description: Marca associada ao produto no CRM.
+  - name: id_produto_crm
+    description: ID original no CRM.
+  - name: id_produto_erp_a
+    description: ItemCode original no ERP A.
+  - name: id_produto_erp_b
+    description: Código original no ERP B.
+  meta:
+    owner: '@data_engineering_team'
+    business_context: Domínio de dados corporativo da Arco Educação.
+    changelog:
+    - date: '2026-08-27'
+      author: Debugger-Global
+      changes: Enriquecimento massivo de metadados PII e Data Quality.

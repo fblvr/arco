@@ -13,11 +13,20 @@ models:
     - unique
   - name: name
     description: Nome ou Razão Social associado ao registro.
+    meta:
+      contains_pii: true
+      classification: Restricted
   - name: razaosocial__c
     description: Nome ou Razão Social associado ao registro.
+    meta:
+      contains_pii: true
+      classification: Restricted
   - name: cnpj__c
     description: Cadastro Nacional da Pessoa Jurídica (CNPJ). Chave de negócio tratada
       e limpa (apenas números).
+    meta:
+      contains_pii: true
+      classification: Restricted
   - name: type
     description: Campo type importado da origem stg_crm_account.
   - name: parentid
@@ -25,6 +34,9 @@ models:
   - name: phone
     description: Telefone de contato normalizado (apenas números, sem código de país
       +55).
+    meta:
+      contains_pii: true
+      classification: Restricted
   - name: billingcity
     description: Campo billingcity importado da origem stg_crm_account.
   - name: billingstate
@@ -43,3 +55,10 @@ models:
   - name: lastmodifieddate
     description: Data/Carimbo de tempo (Timestamp) referenciando a criação ou atualização
       do evento.
+  meta:
+    owner: '@data_engineering_team'
+    business_context: Domínio de dados corporativo da Arco Educação.
+    changelog:
+    - date: '2026-08-27'
+      author: Debugger-Global
+      changes: Enriquecimento massivo de metadados PII e Data Quality.

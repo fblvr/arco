@@ -1,0 +1,38 @@
+version: 2
+models:
+- name: obt_churn_risk_escolas
+  description: One Big Table de Risco de Churn. Apresenta visão 360° da escola, cruzando
+    vendas, chamados e SLA de logística. Escolas de Sandbox são bloqueadas na camada
+    anterior.
+  columns:
+  - name: id_escola
+    description: CNPJ da Escola. Chave de granularidade.
+    tests:
+    - unique
+    - not_null
+  - name: nome_escola
+    description: Nome corporativo.
+    meta:
+      contains_pii: true
+      classification: Restricted
+  - name: data_cadastro
+    description: Antiguidade da conta na Arco.
+  - name: qtd_pedidos
+    description: Volume transacional de compras.
+  - name: valor_total_gasto
+    description: LTV / Faturamento histórico.
+  - name: total_entregas
+    description: Volume físico expedido para a escola.
+  - name: entregas_com_atraso
+    description: Total de entregas que violaram SLA.
+  - name: qtd_chamados
+    description: Volume de atritos no suporte.
+  - name: sla_atendimento_medio_horas
+    description: Média de resolução de problemas em horas.
+  meta:
+    owner: '@data_engineering_team'
+    business_context: Domínio de dados corporativo da Arco Educação.
+    changelog:
+    - date: '2026-08-27'
+      author: Debugger-Global
+      changes: Enriquecimento massivo de metadados PII e Data Quality.

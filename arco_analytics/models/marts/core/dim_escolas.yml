@@ -1,0 +1,34 @@
+version: 2
+models:
+- name: dim_escolas
+  description: Dimensão unificada de escolas. Centraliza o cadastro cruzando CRM e
+    ERPs. Escolas de teste/sandbox são filtradas estruturalmente antes de comporem
+    esta dimensão.
+  columns:
+  - name: id_escola
+    description: CNPJ hasheado da escola. Chave primária.
+    tests:
+    - unique
+    - not_null
+  - name: nome_escola
+    description: Nome resolvido por prioridade sistêmica (CRM > ERP).
+    meta:
+      contains_pii: true
+      classification: Restricted
+  - name: data_cadastro
+    description: Data mais antiga de cadastro encontrada nos sistemas.
+  - name: has_crm
+    description: 'Lineage flag: Indica se a escola existe no CRM.'
+  - name: has_erp_a
+    description: 'Lineage flag: Indica se a escola existe no ERP A.'
+  - name: has_erp_b
+    description: 'Lineage flag: Indica se a escola existe no ERP B.'
+  - name: has_zendesk
+    description: 'Lineage flag: Indica se a escola existe no Zendesk.'
+  meta:
+    owner: '@data_engineering_team'
+    business_context: Domínio de dados corporativo da Arco Educação.
+    changelog:
+    - date: '2026-08-27'
+      author: Debugger-Global
+      changes: Enriquecimento massivo de metadados PII e Data Quality.

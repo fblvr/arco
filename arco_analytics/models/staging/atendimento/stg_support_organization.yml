@@ -13,15 +13,28 @@ models:
     - unique
   - name: name
     description: Nome ou Razão Social associado ao registro.
+    meta:
+      contains_pii: true
+      classification: Restricted
   - name: details
     description: Campo details importado da origem stg_support_organization.
   - name: external_id
     description: Campo external_id importado da origem stg_support_organization.
   - name: domain_names
     description: Nome ou Razão Social associado ao registro.
+    meta:
+      contains_pii: true
+      classification: Restricted
   - name: created_at
     description: Data/Carimbo de tempo (Timestamp) referenciando a criação ou atualização
       do evento.
   - name: updated_at
     description: Data/Carimbo de tempo (Timestamp) referenciando a criação ou atualização
       do evento.
+  meta:
+    owner: '@data_engineering_team'
+    business_context: Domínio de dados corporativo da Arco Educação.
+    changelog:
+    - date: '2026-08-27'
+      author: Debugger-Global
+      changes: Enriquecimento massivo de metadados PII e Data Quality.

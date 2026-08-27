@@ -1,0 +1,35 @@
+version: 2
+models:
+- name: fct_logistica_entregas
+  description: Fato Logística. Rastreia o fluxo físico e SLA de entregas, integrando
+    Nota Fiscal com Delivery.
+  columns:
+  - name: id_entrega
+    description: SK da entrega. Chave primária.
+    tests:
+    - unique
+    - not_null
+  - name: id_pedido
+    description: SK do pedido relacionado.
+  - name: id_cliente
+    description: CNPJ do cliente.
+  - name: data_pedido
+    description: Data que o pedido foi feito.
+  - name: data_entrega_prevista
+    description: Data acordada/SLA.
+  - name: data_entrega_real
+    description: Data da efetivação da entrega.
+  - name: atraso_dias
+    description: Dias de atraso (Real - Prevista). Valores positivos indicam violação
+      de SLA.
+  - name: status_entrega
+    description: Situação do tráfego.
+  - name: sistema_origem
+    description: Sistema de logística origem.
+  meta:
+    owner: '@data_engineering_team'
+    business_context: Domínio de dados corporativo da Arco Educação.
+    changelog:
+    - date: '2026-08-27'
+      author: Debugger-Global
+      changes: Enriquecimento massivo de metadados PII e Data Quality.

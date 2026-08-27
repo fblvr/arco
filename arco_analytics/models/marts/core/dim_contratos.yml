@@ -1,0 +1,27 @@
+version: 2
+models:
+- name: dim_contratos
+  description: Dimensão de contratos originados do CRM.
+  columns:
+  - name: id_contrato
+    description: ID do contrato. Chave primária.
+    tests:
+    - unique
+    - not_null
+  - name: id_cliente_crm
+    description: Chave estrangeira para o CRM Account ID.
+  - name: id_contrato_origem
+    description: Número do contrato no CRM.
+  - name: data_inicio
+    description: Data de início da vigência.
+  - name: data_fim
+    description: Data de término da vigência.
+  - name: status
+    description: Status do contrato normalizado.
+  meta:
+    owner: '@data_engineering_team'
+    business_context: Domínio de dados corporativo da Arco Educação.
+    changelog:
+    - date: '2026-08-27'
+      author: Debugger-Global
+      changes: Enriquecimento massivo de metadados PII e Data Quality.
