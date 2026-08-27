@@ -36,3 +36,5 @@ models:
     - date: '2026-08-27'
       author: Debugger-Global
       changes: Enriquecimento massivo de metadados PII e Data Quality.
+    aggregation_logic: Agregação executiva (One Big Table) consolidando métricas por
+      escola/entrega.

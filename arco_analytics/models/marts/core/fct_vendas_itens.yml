@@ -35,3 +35,6 @@ models:
     - date: '2026-08-27'
       author: Debugger-Global
       changes: Enriquecimento massivo de metadados PII e Data Quality.
+    join_logic: Itens do pedido. FK_produto = id_produto_unificado (hash do nome).
+      FK_pedido = id_pedido.
+    business_rules: Sem regras complexas documentadas.

@@ -1,7 +1,7 @@
 WITH erp_a AS (
     SELECT
-        'ERP_A_' || CAST(docentry AS VARCHAR) AS id_pedido,
-        'ERP_A_' || CAST(docentry AS VARCHAR) || '_' || CAST(linenum AS VARCHAR) AS id_item_pedido,
+        'ERP_A_' || docentry AS id_pedido,
+        'ERP_A_' || docentry || '_' || linenum AS id_item_pedido,
         MD5(UPPER(itemname)) AS id_produto_unificado,
         itemcode AS id_produto_origem,
         quantity AS qtd_pedida,
@@ -11,8 +11,8 @@ WITH erp_a AS (
 ),
 erp_b AS (
     SELECT
-        'ERP_B_' || CAST(id_pedido AS VARCHAR) AS id_pedido,
-        'ERP_B_' || CAST(id_item AS VARCHAR) AS id_item_pedido,
+        'ERP_B_' || id_pedido AS id_pedido,
+        'ERP_B_' || id_item AS id_item_pedido,
         MD5(UPPER(desc_produto)) AS id_produto_unificado,
         cod_produto AS id_produto_origem,
         qtd_pedida,

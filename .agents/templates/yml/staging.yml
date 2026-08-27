@@ -1,0 +1,23 @@
+version: 2
+models:
+  - name: stg_source_system_entity
+    description: "Espelho exato da fonte. Tipagens resolvidas (CAST) e PII hasheado. Sem agregações complexas."
+    meta:
+      owner: "@data_engineering_team"
+      source_system: "ERP A / CRM / Zendesk"
+      business_context: "Descreva brevemente o que esta tabela crua representa."
+      changelog:
+        - date: "YYYY-MM-DD"
+          author: "Debugger-Global ou Nome"
+          changes: "Criação inicial da staging."
+    columns:
+      - name: id_primario
+        description: "Chave primária na origem."
+        tests:
+          - unique
+          - not_null
+      - name: coluna_sensivel_pii
+        description: "Coluna contendo PII, deve estar hasheada."
+        meta:
+          contains_pii: true
+          classification: Restricted

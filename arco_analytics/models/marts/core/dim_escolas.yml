@@ -32,3 +32,6 @@ models:
     - date: '2026-08-27'
       author: Debugger-Global
       changes: Enriquecimento massivo de metadados PII e Data Quality.
+    join_logic: Surrogate Key = hash(CNPJ). Integrou ERP A e B via UNION ALL baseando-se
+      no CNPJ.
+    business_rules: Filtra Escolas de Sandbox documentadas no business_rules.md

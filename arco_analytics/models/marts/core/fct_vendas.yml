@@ -39,3 +39,6 @@ models:
     - date: '2026-08-27'
       author: Debugger-Global
       changes: Enriquecimento massivo de metadados PII e Data Quality.
+    join_logic: Pedidos de vendas. FK_cliente = id_escola (via CNPJ). FK_vendedor
+      = id_vendedor_sk.
+    business_rules: Pedidos órfãos do ERP A são intencionais (Drafts).

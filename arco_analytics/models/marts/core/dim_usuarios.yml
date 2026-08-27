@@ -29,3 +29,5 @@ models:
     - date: '2026-08-27'
       author: Debugger-Global
       changes: Enriquecimento massivo de metadados PII e Data Quality.
+    join_logic: Surrogate Key = MD5(sistema_origem + id_usuario_sistema).
+    business_rules: Sem regras complexas documentadas.

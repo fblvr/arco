@@ -8,7 +8,7 @@ WITH crm_users AS (
 ),
 support_users AS (
     SELECT 
-        CAST(id AS VARCHAR) as id_usuario_sistema,
+        id as id_usuario_sistema,
         name as nome_usuario,
         email,
         'Support Zendesk' as sistema_origem

@@ -1,7 +1,7 @@
 WITH dim_contratos_raw AS (
     SELECT
-        CAST(id AS VARCHAR) AS id_contrato,
-        CAST(accountid AS VARCHAR) AS id_cliente_crm,
+        id AS id_contrato,
+        accountid AS id_cliente_crm,
         contractnumber AS id_contrato_origem,
         startdate AS data_inicio,
         enddate AS data_fim,

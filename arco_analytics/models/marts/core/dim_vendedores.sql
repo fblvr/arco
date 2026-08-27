@@ -7,14 +7,14 @@ erp_b AS (
     FROM {{ ref('stg_erp_b_vendedor') }}
 )
 SELECT 
-    REPLACE(sistema_origem, ' ', '_') || '_' || CAST(id_vendedor_sistema AS VARCHAR) as id_vendedor_sk,
+    REPLACE(sistema_origem, ' ', '_') || '_' || id_vendedor_sistema as id_vendedor_sk,
     id_vendedor_sistema,
     nome_vendedor,
     sistema_origem
 FROM erp_a
 UNION ALL
 SELECT 
-    REPLACE(sistema_origem, ' ', '_') || '_' || CAST(id_vendedor_sistema AS VARCHAR) as id_vendedor_sk,
+    REPLACE(sistema_origem, ' ', '_') || '_' || id_vendedor_sistema as id_vendedor_sk,
     id_vendedor_sistema,
     nome_vendedor,
     sistema_origem

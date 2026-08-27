@@ -1,0 +1,24 @@
+version: 2
+models:
+  - name: fct_ou_dim_modelo
+    description: "Modelo normalizado em Star Schema."
+    meta:
+      owner: "@data_engineering_team"
+      business_rules: "Descreva como a lógica de negócio foi aplicada: deduplicações, prioridades de fonte ou bloqueio de sandboxes."
+      join_logic: "Descreva a lógica de integridade referencial: como as Fatos cruzam com as Dimensões e como a Surrogate Key foi forjada."
+      changelog:
+        - date: "YYYY-MM-DD"
+          author: "Debugger-Global ou Nome"
+          changes: "Criação inicial."
+    columns:
+      - name: id_primario
+        description: "Surrogate Key (SK) forjada."
+        tests:
+          - unique
+          - not_null
+      - name: id_estrangeiro
+        description: "Foreign Key (FK)."
+        tests:
+          - relationships:
+              to: ref('tabela_alvo')
+              field: pk_alvo

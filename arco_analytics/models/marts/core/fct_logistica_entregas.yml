@@ -37,3 +37,5 @@ models:
     - date: '2026-08-27'
       author: Debugger-Global
       changes: Enriquecimento massivo de metadados PII e Data Quality.
+    join_logic: Entregas. FK_pedido = id_pedido.
+    business_rules: Sem regras complexas documentadas.

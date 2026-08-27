@@ -1,6 +1,6 @@
 WITH tickets AS (
     SELECT
-        CAST(t.id AS BIGINT) AS id_ticket,
+        t.id AS id_ticket,
         COALESCE(o.external_id, t.custom_field_cnpj) AS id_cliente,
         t.custom_field_order_ref AS id_pedido_ref,
         t.created_at,
