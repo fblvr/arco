@@ -1,4 +1,4 @@
-WITH source AS (
+WITH stg_erp_a_customer_raw AS (
     SELECT
         CAST("CardCode" AS VARCHAR) AS cardcode,
         CAST("CardName" AS VARCHAR) AS cardname,
@@ -12,4 +12,4 @@ WITH source AS (
         CAST("UpdateDate" AS DATE) AS updatedate
     FROM {{ source('erp_a', 'erp_a_customer') }}
 )
-SELECT * FROM source
+SELECT * FROM stg_erp_a_customer_raw

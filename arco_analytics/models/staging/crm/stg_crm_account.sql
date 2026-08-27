@@ -1,4 +1,4 @@
-WITH source AS (
+WITH stg_crm_account_raw AS (
     SELECT
         CAST("Id" AS VARCHAR) AS id,
         CAST("Name" AS VARCHAR) AS name,
@@ -17,4 +17,4 @@ WITH source AS (
         CAST("LastModifiedDate" AS TIMESTAMP) AS lastmodifieddate
     FROM {{ source('crm', 'crm_account') }}
 )
-SELECT * FROM source
+SELECT * FROM stg_crm_account_raw

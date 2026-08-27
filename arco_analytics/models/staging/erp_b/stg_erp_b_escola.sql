@@ -1,4 +1,4 @@
-WITH source AS (
+WITH stg_erp_b_escola_raw AS (
     SELECT
         CAST("id_escola" AS BIGINT) AS id_escola,
         CAST("nome_escola" AS VARCHAR) AS nome_escola,
@@ -11,4 +11,4 @@ WITH source AS (
         CAST("dt_atualizacao" AS DATE) AS dt_atualizacao
     FROM {{ source('erp_b', 'erp_b_escola') }}
 )
-SELECT * FROM source
+SELECT * FROM stg_erp_b_escola_raw

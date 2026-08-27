@@ -1,4 +1,4 @@
-WITH source AS (
+WITH stg_support_user_raw AS (
     SELECT
         CAST("id" AS BIGINT) AS id,
         CAST("name" AS VARCHAR) AS name,
@@ -11,4 +11,4 @@ WITH source AS (
         CAST("updated_at" AS TIMESTAMP) AS updated_at
     FROM {{ source('atendimento', 'support_user') }}
 )
-SELECT * FROM source
+SELECT * FROM stg_support_user_raw
