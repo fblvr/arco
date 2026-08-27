@@ -10,6 +10,10 @@ models:
     - not_null
   - name: id_pedido
     description: SK do pedido pai.
+    tests:
+    - relationships:
+        to: ref('fct_vendas')
+        field: id_pedido
   - name: id_produto_origem
     description: Código do produto no sistema fonte.
   - name: qtd_pedida
@@ -18,6 +22,12 @@ models:
     description: Receita bruta do item.
   - name: sistema_origem
     description: Sistema (ERP A ou ERP B).
+  - name: id_produto_unificado
+    description: Surrogate key unificada do produto.
+    tests:
+    - relationships:
+        to: ref('dim_produtos')
+        field: id_produto_unificado
   meta:
     owner: '@data_engineering_team'
     business_context: Domínio de dados corporativo da Arco Educação.

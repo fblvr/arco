@@ -15,6 +15,12 @@ models:
         tests:
           - unique
           - not_null
+      - name: nome_da_chave_estrangeira
+        description: "Chave estrangeira (FK) referenciando a tabela Y."
+        tests:
+          - relationships:
+              to: ref('nome_da_tabela_dimensao')
+              field: nome_da_chave_primaria_na_dimensao
       - name: coluna_pii_exemplo
         description: "Exemplo de coluna que contém dados sensíveis (email, nome, documento, telefone)."
         meta:

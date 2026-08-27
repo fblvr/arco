@@ -14,10 +14,18 @@ models:
     - not_null
   - name: id_cliente
     description: CNPJ do cliente. Chave estrangeira para dim_escolas.
+    tests:
+    - relationships:
+        to: ref('dim_escolas')
+        field: id_escola
   - name: data_pedido
     description: Data de emissão do pedido.
   - name: id_vendedor_sk
     description: SK do vendedor. Chave estrangeira para dim_vendedores.
+    tests:
+    - relationships:
+        to: ref('dim_vendedores')
+        field: id_vendedor_sk
   - name: status_pedido
     description: Status normalizado do pedido.
   - name: is_cancelado

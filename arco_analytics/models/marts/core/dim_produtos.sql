@@ -6,7 +6,7 @@ WITH all_products AS (
     SELECT cod_produto, desc_produto, NULL, 'ERP B' FROM {{ ref('stg_erp_b_item_pedido') }}
 )
 SELECT 
-    MD5(MAX(nome_produto)) AS id_produto_unificado,
+    MD5(UPPER(nome_produto)) AS id_produto_unificado,
     MAX(nome_produto) AS nome_produto,
     MAX(marca) AS marca,
     MAX(CASE WHEN sistema = 'CRM' THEN id_produto_origem END) AS id_produto_crm,

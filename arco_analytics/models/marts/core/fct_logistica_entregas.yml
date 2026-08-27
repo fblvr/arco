@@ -11,6 +11,10 @@ models:
     - not_null
   - name: id_pedido
     description: SK do pedido relacionado.
+    tests:
+    - relationships:
+        to: ref('fct_vendas')
+        field: id_pedido
   - name: id_cliente
     description: CNPJ do cliente.
   - name: data_pedido
