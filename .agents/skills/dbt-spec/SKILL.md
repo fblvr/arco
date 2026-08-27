@@ -15,7 +15,7 @@ This skill guarantees that the physical file structure and metadata of the dbt p
 
 ## The Iron Law
 **No model exists without its metadata.**
-A `.sql` file without an accompanying deeply populated `.yml` file is considered broken code.
+A `.sql` file without an accompanying deeply populated `.yml` file is considered broken code. **Todos os novos YMLs devem derivar estruturalmente de `.agents/templates/dbt_model_template.yml`.**
 
 ## Red Flags - STOP and Start Over
 1. Model `file_name.sql` does not have a `file_name.yml` in the exact same directory.
