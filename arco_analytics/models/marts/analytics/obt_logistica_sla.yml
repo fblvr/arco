@@ -19,6 +19,7 @@ models:
   - name: is_atrasado
     description: Flag booleana se a entrega superou a data prometida.
   meta:
+    summary: 'Modelo de dados para obt_logistica_sla'
     owner: '@data_engineering_team'
     business_context: Domínio de dados corporativo da Arco Educação.
     changelog:

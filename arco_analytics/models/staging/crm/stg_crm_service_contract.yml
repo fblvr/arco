@@ -49,6 +49,7 @@ models:
     description: Data/Carimbo de tempo (Timestamp) referenciando a criação ou atualização
       do evento.
   meta:
+    summary: 'Modelo de dados para stg_crm_service_contract'
     owner: '@data_engineering_team'
     business_context: Domínio de dados corporativo da Arco Educação.
     changelog:

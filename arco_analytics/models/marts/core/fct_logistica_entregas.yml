@@ -31,6 +31,7 @@ models:
   - name: sistema_origem
     description: Sistema de logística origem.
   meta:
+    summary: 'Modelo de dados para fct_logistica_entregas'
     owner: '@data_engineering_team'
     business_context: Domínio de dados corporativo da Arco Educação.
     changelog:

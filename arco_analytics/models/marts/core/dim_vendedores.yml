@@ -18,6 +18,7 @@ models:
   - name: sistema_origem
     description: Sistema de onde o registro foi extraído.
   meta:
+    summary: 'Modelo de dados para dim_vendedores'
     owner: '@data_engineering_team'
     business_context: Domínio de dados corporativo da Arco Educação.
     changelog:

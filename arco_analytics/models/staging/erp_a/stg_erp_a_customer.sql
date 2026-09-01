@@ -1,12 +1,12 @@
 WITH stg_erp_a_customer_raw AS (
     SELECT
-        CAST("CardCode" AS VARCHAR) AS cardcode,
-        CAST("CardName" AS VARCHAR) AS cardname,
-        {{ hash_pii(normalize_cnpj('CAST("CNPJ" AS VARCHAR)')) }} AS cnpj,
-        CAST("City" AS VARCHAR) AS city,
-        CAST("State" AS VARCHAR) AS state,
-        {{ hash_pii(normalize_phone('CAST("Phone1" AS VARCHAR)')) }} AS phone1,
-        CAST("E_Mail" AS VARCHAR) AS e_mail,
+        CAST("CardCode" AS STRING) AS cardcode,
+        CAST("CardName" AS STRING) AS cardname,
+        {{ hash_pii(normalize_cnpj('CAST("CNPJ" AS STRING)')) }} AS cnpj,
+        CAST("City" AS STRING) AS city,
+        CAST("State" AS STRING) AS state,
+        {{ hash_pii(normalize_phone('CAST("Phone1" AS STRING)')) }} AS phone1,
+        CAST("E_Mail" AS STRING) AS e_mail,
         CAST("SlpCode" AS BIGINT) AS slpcode,
         CAST("CreateDate" AS DATE) AS createdate,
         CAST("UpdateDate" AS DATE) AS updatedate

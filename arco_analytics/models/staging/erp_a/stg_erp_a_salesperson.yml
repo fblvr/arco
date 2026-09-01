@@ -21,6 +21,7 @@ models:
   - name: active
     description: Campo active importado da origem stg_erp_a_salesperson.
   meta:
+    summary: 'Modelo de dados para stg_erp_a_salesperson'
     owner: '@data_engineering_team'
     business_context: Domínio de dados corporativo da Arco Educação.
     changelog:

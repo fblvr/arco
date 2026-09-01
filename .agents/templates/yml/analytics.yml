@@ -4,12 +4,18 @@ models:
     description: "Tabela desnormalizada focada no consumo do negócio."
     meta:
       owner: "@data_analytics"
+      domain: "Ex: Vendas, Suporte"
+      grain: "Ex: 1 linha = 1 escola agregada"
+      update_frequency: "Diário"
+      governance: "Gold Certified"
       business_context: "Propósito executivo deste dado."
       aggregation_logic: "Descreva a granularidade final e quais lógicas de agrupamento foram aplicadas (ex: SUM(vendas))."
       changelog:
         - date: "YYYY-MM-DD"
           author: "Debugger-Global ou Nome"
           changes: "Criação inicial."
+    config:
+      tags: ["analytics", "SEU_DOMINIO"]
     columns:
       - name: id_granularidade
         description: "Chave de granularidade agregada."

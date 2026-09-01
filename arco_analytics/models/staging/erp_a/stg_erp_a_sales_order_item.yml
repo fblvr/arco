@@ -34,6 +34,7 @@ models:
   - name: linetotal
     description: Campo linetotal importado da origem stg_erp_a_sales_order_item.
   meta:
+    summary: 'Modelo de dados para stg_erp_a_sales_order_item'
     owner: '@data_engineering_team'
     business_context: Domínio de dados corporativo da Arco Educação.
     changelog:

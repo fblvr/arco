@@ -1,11 +1,11 @@
 WITH stg_crm_contract_line_item_raw AS (
     SELECT
-        CAST("Id" AS VARCHAR) AS id,
+        CAST("Id" AS STRING) AS id,
         CAST("ServiceContractId" AS BIGINT) AS servicecontractid,
-        CAST("ProductId" AS VARCHAR) AS productid,
-        CAST("MaterialType__c" AS VARCHAR) AS materialtype__c,
-        CAST("SchoolGrade__c" AS VARCHAR) AS schoolgrade__c,
-        CAST("Segment__c" AS VARCHAR) AS segment__c,
+        CAST("ProductId" AS STRING) AS productid,
+        CAST("MaterialType__c" AS STRING) AS materialtype__c,
+        CAST("SchoolGrade__c" AS STRING) AS schoolgrade__c,
+        CAST("Segment__c" AS STRING) AS segment__c,
         CAST("Quantity" AS BIGINT) AS quantity,
         CAST("UnitPrice" AS DOUBLE) AS unitprice,
         CAST("Discount" AS DOUBLE) AS discount,

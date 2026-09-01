@@ -30,6 +30,7 @@ models:
   - name: sla_atendimento_medio_horas
     description: Média de resolução de problemas em horas.
   meta:
+    summary: 'Modelo de dados para obt_churn_risk_escolas'
     owner: '@data_engineering_team'
     business_context: Domínio de dados corporativo da Arco Educação.
     changelog:

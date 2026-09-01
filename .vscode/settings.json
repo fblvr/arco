@@ -1,0 +1,16 @@
+{
+    "vscode-bigquery.projects": [
+        "arco-507115"
+    ],
+    "vscode-bigquery.pinned-projects": [
+        "arco-507115"
+    ],
+    "dbt.projectRoot": [
+        "arco_analytics"
+    ],
+    "dbt.dbtPythonPathOverride": "${workspaceFolder}/venv/bin/python",
+    "editor.acceptSuggestionOnCommitCharacter": false,
+    "editor.acceptSuggestionOnEnter": "off",
+    "editor.inlineSuggest.edits.allowCodeShifting": "never",
+    "editor.inlineSuggest.edits.renderSideBySide": "never"
+}

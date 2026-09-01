@@ -19,6 +19,7 @@ models:
   - name: status
     description: Status do contrato normalizado.
   meta:
+    summary: 'Modelo de dados para dim_contratos'
     owner: '@data_engineering_team'
     business_context: Domínio de dados corporativo da Arco Educação.
     changelog:

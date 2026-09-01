@@ -26,6 +26,7 @@ models:
   - name: has_zendesk
     description: 'Lineage flag: Indica se a escola existe no Zendesk.'
   meta:
+    summary: 'Modelo de dados para dim_escolas'
     owner: '@data_engineering_team'
     business_context: Domínio de dados corporativo da Arco Educação.
     changelog:

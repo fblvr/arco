@@ -1,3 +1,3 @@
 {% macro normalize_cnpj(column_name) %}
-    REGEXP_REPLACE(CAST({{ column_name }} AS VARCHAR), '[^0-9]', '', 'g')
+    regexp_replace(CAST({{ column_name }} AS STRING), '[^0-9]', '')
 {% endmacro %}

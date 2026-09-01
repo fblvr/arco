@@ -1,42 +1,59 @@
 WITH escolas AS (
-    SELECT * FROM {{ ref('dim_escolas') }}
+    SELECT 
+        escola_id,
+        escola_nome,
+        data_cadastro,
+        has_crm,
+        has_erp_a,
+        has_erp_b,
+        has_zendesk
+    FROM {{ ref('dim_escolas') }}
+),
+vendas_pedidos AS (
+    SELECT 
+        p.id_pedido, 
+        p.id_cliente, 
+        SUM(i.valor_total) AS valor_total
+    FROM {{ ref('fct_vendas') }} AS p
+    INNER JOIN {{ ref('fct_vendas_itens') }} AS i ON p.id_pedido = i.id_pedido
+    GROUP BY p.id_pedido, p.id_cliente
+),
+vendas_clientes AS (
+    SELECT 
+        id_pedido, 
+        id_cliente, 
+        MAX(valor_total) AS valor_total 
+    FROM vendas_pedidos 
+    GROUP BY id_pedido, id_cliente
 ),
 vendas AS (
     SELECT 
-        id_cliente as id_escola,
-        COUNT(id_pedido) as qtd_pedidos,
-        SUM(valor_total) as valor_total_gasto
-    FROM (
-        SELECT id_pedido, id_cliente, MAX(valor_total) as valor_total 
-        FROM (
-            SELECT p.id_pedido, p.id_cliente, SUM(i.valor_total) as valor_total
-            FROM {{ ref('fct_vendas') }} p
-            JOIN {{ ref('fct_vendas_itens') }} i ON p.id_pedido = i.id_pedido
-            GROUP BY p.id_pedido, p.id_cliente
-        ) GROUP BY id_pedido, id_cliente
-    )
+        id_cliente AS id_escola,
+        COUNT(id_pedido) AS qtd_pedidos,
+        SUM(valor_total) AS valor_total_gasto
+    FROM vendas_clientes
     GROUP BY id_cliente
 ),
 entregas AS (
     SELECT
-        id_cliente as id_escola,
-        COUNT(id_entrega) as total_entregas,
-        SUM(CASE WHEN atraso_dias > 0 THEN 1 ELSE 0 END) as entregas_com_atraso,
-        AVG(CASE WHEN atraso_dias > 0 THEN atraso_dias ELSE 0 END) as media_dias_atraso
+        id_cliente AS id_escola,
+        COUNT(id_entrega) AS total_entregas,
+        SUM(CASE WHEN atraso_dias > 0 THEN 1 ELSE 0 END) AS entregas_com_atraso,
+        AVG(CASE WHEN atraso_dias > 0 THEN atraso_dias ELSE 0 END) AS media_dias_atraso
     FROM {{ ref('fct_logistica_entregas') }}
     GROUP BY id_cliente
 ),
 tickets AS (
     SELECT 
-        id_cliente as id_escola,
-        COUNT(id_ticket) as qtd_chamados,
-        AVG(date_diff('hour', created_at, solved_at)) as sla_atendimento_medio_horas
+        id_cliente AS id_escola,
+        COUNT(id_ticket) AS qtd_chamados,
+        AVG(date_diff('hour', created_at, solved_at)) AS sla_atendimento_medio_horas
     FROM {{ ref('fct_tickets') }}
     GROUP BY id_cliente
 )
 SELECT
-    e.id_escola,
-    e.nome_escola,
+    e.escola_id,
+    e.escola_nome,
     e.data_cadastro,
     COALESCE(v.qtd_pedidos, 0) AS qtd_pedidos,
     COALESCE(v.valor_total_gasto, 0.0) AS valor_total_gasto,
@@ -48,7 +65,7 @@ SELECT
     e.has_erp_a,
     e.has_erp_b,
     e.has_zendesk
-FROM escolas e
-LEFT JOIN vendas v ON e.id_escola = v.id_escola
-LEFT JOIN entregas en ON e.id_escola = en.id_escola
-LEFT JOIN tickets t ON e.id_escola = t.id_escola
+FROM escolas AS e
+LEFT JOIN vendas AS v ON e.escola_id = v.id_escola
+LEFT JOIN entregas AS en ON e.escola_id = en.id_escola
+LEFT JOIN tickets AS t ON e.escola_id = t.id_escola

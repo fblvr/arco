@@ -10,6 +10,7 @@ models:
   - name: tag
     description: Campo tag importado da origem stg_support_ticket_tag.
   meta:
+    summary: 'Modelo de dados para stg_support_ticket_tag'
     owner: '@data_engineering_team'
     business_context: Domínio de dados corporativo da Arco Educação.
     changelog:

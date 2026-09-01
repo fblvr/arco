@@ -22,6 +22,7 @@ models:
   - name: id_produto_erp_b
     description: Código original no ERP B.
   meta:
+    summary: 'Modelo de dados para dim_produtos'
     owner: '@data_engineering_team'
     business_context: Domínio de dados corporativo da Arco Educação.
     changelog:

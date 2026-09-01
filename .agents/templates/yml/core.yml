@@ -4,18 +4,29 @@ models:
     description: "Modelo normalizado em Star Schema."
     meta:
       owner: "@data_engineering_team"
+      domain: "Vendas / Logística / Suporte / Corporativo"
+      grain: "Ex: 1 linha = 1 item de pedido"
+      update_frequency: "Diário"
+      governance: "Silver Certified"
       business_rules: "Descreva como a lógica de negócio foi aplicada: deduplicações, prioridades de fonte ou bloqueio de sandboxes."
-      join_logic: "Descreva a lógica de integridade referencial: como as Fatos cruzam com as Dimensões e como a Surrogate Key foi forjada."
+      join_logic: "Descreva a lógica de integridade referencial."
       changelog:
         - date: "YYYY-MM-DD"
           author: "Debugger-Global ou Nome"
           changes: "Criação inicial."
+    config:
+      tags: ["core", "SEU_DOMINIO"]
     columns:
       - name: id_primario
         description: "Surrogate Key (SK) forjada."
         tests:
           - unique
           - not_null
+      - name: status_exemplo
+        description: "Coluna de domínio fechado."
+        tests:
+          - accepted_values:
+              values: ['Ativo', 'Cancelado']
       - name: id_estrangeiro
         description: "Foreign Key (FK)."
         tests:

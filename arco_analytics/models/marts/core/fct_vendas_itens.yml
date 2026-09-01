@@ -29,6 +29,7 @@ models:
         to: ref('dim_produtos')
         field: id_produto_unificado
   meta:
+    summary: 'Modelo de dados para fct_vendas_itens'
     owner: '@data_engineering_team'
     business_context: Domínio de dados corporativo da Arco Educação.
     changelog:

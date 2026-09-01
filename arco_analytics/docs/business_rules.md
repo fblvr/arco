@@ -1,23 +1,33 @@
-# Catálogo Oficial de Regras de Negócio (Arco Educação)
+# Regras de Negócio e Convenções do Data Warehouse
 
-Este documento centraliza as regras lógicas e empíricas aplicadas no Data Warehouse. Ele serve como o norte para qualquer auditoria, evitando suposições cegas sobre métricas e transformações.
+Este documento consolida as regras de negócio inferidas da operação e implementadas nas camadas Staging e Marts do dbt.
 
-## 1. Tratamento de Sandboxes (Escolas de Teste)
-**Problema:** Bases transacionais de ERP frequentemente possuem registros criados pela TI para homologação (ex: "ESCOLA DE HOMOLOGAÇÃO", "TESTE SISTEMA").
-**Regra Aplicada:** A Dimensão de Escolas (`dim_escolas`) implementa um hard-filtering em tempo de processamento Core. Registros de ERP que não possuam e-mail, ou que o nome/e-mail contenham as strings lógicas de sandbox, são extirpados.
-**Impacto Dimensional:** A cardinalidade da Gold sempre será (Total Staging - Sandboxes Excluídos). O volume não será 1:1.
+## 1. Identificação Universal (Chave CNPJ)
+O ecossistema da Arco utiliza o **CNPJ** como chave universal para consolidar clientes entre o CRM, ERP A, ERP B e Zendesk.
+- **Sanitização:** Todos os CNPJs devem ser limpos de caracteres especiais. A macro `clean_cnpj` extrai numerais de strings sujas utilizando `REGEXP_REPLACE(coluna, '[^0-9]', '')`.
+- **Zendesk (Tickets e Organizations):** A chave do cliente não possui integridade rigorosa. O CNPJ é procurado no `external_id` ou de forma bruta dentro da descrição (campo `details`) da organização, via função de `COALESCE`.
 
-## 2. Padrão de Órfãos em Pedidos (Fato Vendas)
-**Problema:** Encontrado Join de Vendas (Header) vs Itens (Detail) gerando menos IDs únicos após o cruzamento, indicando Pedidos sem Itens.
-**Regra Aplicada:** No ERP A, 5 registros foram mapeados sem amarrações filhas. Uma auditoria revelou que todos possuíam `status_pedido = 'CANCELLED'`.
-**Documentação:** Órfãos com status Cancelado/Draft são esperados e legítimos. Eles representam aberturas de tela que não chegaram a gerar um item de faturamento. Não há vazamento ou Fan-Out nesses cenários.
+## 2. Lógica Anti-Dummy e Limpeza de Lixo
+As bases de produção não validam regras rígidas e acumulam dados de homologação.
+- **E-mails Internos:** Clientes com domínio `@arco` são desconsiderados (filtrados no Staging de CRM, ERP A e ERP B) para não poluir tabelas de análise.
+- **CNPJs Nulos Repetitivos:** Entradas contendo CNPJs como `00000000000000` ou `11111111111111` são excluídas na construção das dimensões transversais (ex: `dim_escolas`).
 
-## 3. Deduplicação Multissistema (Prevenção de Fan-Out)
-**Problema:** Produtos ou Contas podem ter a mesma Nomenclatura no CRM (Salesforce) e no ERP B, mas IDs independentes. Um JOIN cego geraria duplicação cartesiana (Fan-out).
-**Regra Aplicada:** Nas agregações de Core, dados de múltiplas origens são unidos (UNION ALL) e agregados via `GROUP BY UPPER(nome)`, forçando uma "Golden Record" baseada no nome normalizado, ao invés de depender de chaves fracas cruzadas erroneamente.
+## 3. Gestão de Status e Cancelamento
+O conceito de "Cancelado" difere entre os sistemas de backoffice:
+- **ERP A:** O campo `docstatus` com valor `'C'` significa **Concluded** (Concluído/Entregue), indicando sucesso logístico. O cancelamento é regido estritamente pelo campo flag `cancelled = 'Y'`.
+- **ERP B:** O campo de status pode conter o literal `'C'`, `'CANCELLED'` ou `'CANCELADO'`, e neste sistema, `'C'` de fato significa **Cancelado**.
+A macro `normalize_status` removeu a generalização do `'C'` para evitar o super-faturamento de churn no ERP A. A modelagem (`fct_vendas`) lida explicitamente com essa ramificação semântica.
 
-## 4. Normalização de Data Quality
-Para garantir agrupamentos (GROUP BY) consistentes na Gold:
-* **Status:** A macro `normalize_status` empilha strings como `[pending, open, PENDENTE, E]` sob o padrão único `PENDING`, e `[C, CANCELADO, CANCELLED]` como `CANCELLED`.
-* **Telefones:** A macro `normalize_phone` corta DDI nacional (+55, 55) em início de string, espaços, traços e parenteses (DDI).
-* **CNPJ:** A macro `normalize_cnpj` aplica máscara Regex cortando strings até sobrarem estritamente números contínuos, antes de aplicar a criptografia MD5 (LGPD).
+## 4. Colisão de Chaves Primárias (Union All)
+Múltiplos ERPs partilham a mesma sequencia numérica para identificadores (ex: Id de vendedor `1`, Pedido `5000`).
+Ao inserir esses dados em Tabelas Fato únicas (`fct_vendas`), o sistema **deve prefixar** as chaves primárias originárias com o nome do sistema (ex: `'ERPA_' || id_vendedor`). Essa regra é mandatória para evitar silent Fan-outs e sobreposição.
+
+## 5. Nomenclatura (Context-First)
+Todas as tabelas da camada Staging devem forçar a nomenclatura das colunas para o padrão `snake_case`, com a primeira palavra definindo o **contexto** lógico do domínio.
+Exemplo:
+- Incorreto: `id_pedido`, `nome_escola`, `dt_cadastro`
+- Correto: `pedido_id`, `escola_nome`, `cadastro_data`
+Isso garante o agrupamento alfabético das entidades nas documentações e ferramentas de BI.
+
+## 6. Padrão de Estilização SQL
+Todos os scripts `.sql` devem seguir 4 espaços de indentação para blocos de `SELECT` dentro de CTEs, facilitando a legibilidade e manutenção.
