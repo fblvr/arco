@@ -28,7 +28,7 @@ duckdb --version
 
 ## Abrindo o banco do case
 
-Na pasta `data/` do material recebido:
+Na pasta `raw/` do material recebido:
 
 ```bash
 duckdb case.duckdb

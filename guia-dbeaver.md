@@ -11,8 +11,8 @@
 
 1. Abra o DBeaver
 2. **Database → New Database Connection** (ou ícone de tomada no canto superior esquerdo)
-3. Busque por **DuckDB** na lista de drivers
-4. Em **Path**, navegue até o arquivo `case.duckdb` (dentro da pasta `data/`)
+3. A primeira caixa diz respeito à extensão e driver do SQLite/DuckDB (se pedir pra baixar bibliotecas do driver, apenas confirme clicando em "Download").
+4. Em **Path**, navegue até o arquivo `case.duckdb` (dentro da pasta `raw/`) que fornecemos e selecione-o.
 5. Clique em **Test Connection** — na primeira vez, o DBeaver vai oferecer baixar o driver DuckDB. Aceite e aguarde
 6. Clique em **Finish**
 

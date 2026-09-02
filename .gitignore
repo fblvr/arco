@@ -2,5 +2,4 @@ venv/
 arco_analytics/target/
 arco_analytics/logs/
 .DS_Store
-data/
 

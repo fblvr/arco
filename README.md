@@ -62,8 +62,15 @@ Os dados estão organizados em 20 tabelas, distribuídas pelos cinco sistemas:
 
 ## Como explorar os dados
 
-Pré-requisito: DuckDB 1.5.0+. A pasta `data/` já vem com `case.duckdb` pronto pra uso (`duckdb case.duckdb`), ou o banco pode ser regerado a partir dos CSVs com `duckdb case.duckdb -c ".read load.sql"`. O `load.sql` carrega as 20 tabelas e imprime a contagem de linhas de cada uma, para conferência do setup — os totais vão de dezenas de linhas (tabelas de dimensão, como `crm_user` ou `erp_b_vendedor`) a alguns milhares (tabelas de fato, como `erp_a_sales_order_item` ou `support_ticket_tag`).
+Pré-requisito: DuckDB 1.5.0+. A pasta `raw/` já vem com `case.duckdb` pronto pra uso (`duckdb raw/case.duckdb`), ou o banco pode ser regerado a partir dos CSVs com `duckdb raw/case.duckdb -c ".read load.sql"`. O `load.sql` carrega as 20 tabelas e imprime a contagem de linhas de cada uma, para conferência do setup — os totais vão de dezenas de linhas (tabelas de dimensão, como `crm_user` ou `erp_b_vendedor`) a alguns milhares (tabelas de fato, como `erp_a_sales_order_item` ou `support_ticket_tag`).
 
 Qualquer ferramenta que conecte a DuckDB pode ser usada pra explorar — SQL puro, Python, notebooks, GUIs como DBeaver (guia opcional incluso no pacote, `guia-dbeaver.md`).
 
+---
 
+## Documentação Técnica Oficial
+
+O repositório possui documentação arquitetural rica para guiar analistas e engenheiros sobre o processamento das informações, cobrindo todo o fluxo, desde as origens transacionais até a camada final de Analytics.
+
+- 📚 **[Camada RAW (Sistemas de Origem)](docs/raw_layer_architecture.md):** Um profundo dicionário e diagrama relacional focando nos dados brutos dos 5 ecossistemas distintos (CRM, ERP A, ERP B, Financeiro, Zendesk).
+- 🏗️ **[Camada de Data Warehouse (DBT)](docs/dwh_architecture.md):** Especificação detalhada sobre a **Arquitetura Medalhão** (Medallion Architecture) aplicada com dbt no Google BigQuery. Aborda o tratamento de LGPD na Staging (Bronze), os modelos transacionais padronizados na Core (Silver), e as super tabelas (OBTs) altamente eficientes da Analytics (Gold).

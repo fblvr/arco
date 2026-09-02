@@ -86,7 +86,7 @@ Com a infraestrutura provisionada e as tabelas `silver` e `gold` construídas, a
 
 ```bash
 # Acesse o ambiente interativo SQL na raiz do projeto
-duckdb data/case.duckdb
+duckdb raw/arco_analytics.duckdb
 ```
 
 ### Comandos Úteis dentro do DuckDB:
@@ -98,5 +98,5 @@ duckdb data/case.duckdb
 ### Execução de Scripts `.sql` Externos
 Para rodar scripts SQL extensos construídos no editor, direcione-os para o DuckDB:
 ```bash
-duckdb data/case.duckdb < meu_script.sql
+duckdb raw/case.duckdb < meu_script.sql
 ```
